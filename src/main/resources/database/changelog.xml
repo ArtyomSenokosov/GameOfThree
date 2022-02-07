@@ -1,0 +1,137 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1" author="artem.senokosov@mail.ru">
+        <createTable tableName="user">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="artem.senokosov@mail.ru">
+        <createTable tableName="player_type">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="artem.senokosov@mail.ru">
+        <createTable tableName="game_status">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="artem.senokosov@mail.ru">
+        <createTable tableName="game">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="init_number" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="current_number" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="finish_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="started_by_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="winner_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="5" author="artem.senokosov@mail.ru">
+        <addForeignKeyConstraint baseTableName="game" baseColumnNames="user_id"
+                                 constraintName="fk_game_user"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="6" author="artem.senokosov@mail.ru">
+        <addForeignKeyConstraint baseTableName="game" baseColumnNames="started_by_id"
+                                 constraintName="fk_game_player_started"
+                                 referencedTableName="player_type"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="7" author="artem.senokosov@mail.ru">
+        <addForeignKeyConstraint baseTableName="game" baseColumnNames="status_id"
+                                 constraintName="fk_game_status"
+                                 referencedTableName="game_status"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="8" author="artem.senokosov@mail.ru">
+        <addForeignKeyConstraint baseTableName="game" baseColumnNames="winner_id"
+                                 constraintName="fk_game_winner"
+                                 referencedTableName="player_type"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="9" author="artem.senokosov@mail.ru">
+        <createTable tableName="game_statistics">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="move_number" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="move_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="game_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="move_by" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="10" author="artem.senokosov@mail.ru">
+        <addForeignKeyConstraint baseTableName="game_statistics" baseColumnNames="game_id"
+                                 constraintName="fk_game_statistics_game"
+                                 referencedTableName="game"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="11" author="artem.senokosov@mail.ru">
+        <addForeignKeyConstraint baseTableName="game_statistics" baseColumnNames="move_by"
+                                 constraintName="fk_game_statistics_user"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

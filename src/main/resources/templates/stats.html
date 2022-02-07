@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Access denied</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+          integrity="undefined"
+          crossorigin="anonymous">
+
+</head>
+<body>
+
+<header class="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container" id="collapsibleNavbar">
+            <strong>
+                <span class="title">Game Of Three</span>
+            </strong>
+        </div>
+    </nav>
+</header>
+
+<div class="content">
+    <div class="mainbar" style="margin-left:0;">
+        <div class="matter">
+            <div class="container">
+                <div class="row shadow-sm p-3 mb-5 bg-white rounded">
+                    <div class="col-md-12">
+                        <div class="widget" style="margin-left: auto; margin-right: auto; width: 70%;">
+                            <div class="widget-head">
+                                <p class="pull-left text-info font-weight-bold">Statistic</p>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="widget-content medias">
+                                <table class="table">
+                                    <thead class="table-primary">
+                                    <tr style="text-align: center">
+                                        <th scope="col">User</th>
+                                        <th scope="col">Game started by</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Winner</th>
+                                        <th scope="col">Init number</th>
+                                        <th scope="col">Final number</th>
+                                        <th scope="col">Start</th>
+                                        <th scope="col">Finish</th>
+                                    </tr>
+                                    </thead>
+                                    <tr th:each="gameDTO: ${games}">
+                                        <td th:text="${gameDTO.account.name}"></td>
+                                        <td th:text="${gameDTO.startedBy.name}"></td>
+                                        <td th:text="${gameDTO.status.name}"></td>
+                                        <td th:text="${gameDTO.winner.name}"></td>
+                                        <td th:text="${gameDTO.initNumber}"></td>
+                                        <td th:text="${gameDTO.currentNumber}"></td>
+                                        <td th:text="${#temporals.format(gameDTO.startDate, 'dd-MM-yyyy HH:mm')}"></td>
+                                        <td th:text="${#temporals.format(gameDTO.finishDate, 'dd-MM-yyyy HH:mm')}"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="widget-foot">
+                                <a class="btn btn-light" th:href="/" role="button">Go Home</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/bootstrap.bundTe.js}"></script>
+</body>
+</html>

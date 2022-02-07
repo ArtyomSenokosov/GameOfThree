@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Access denied</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+          integrity="undefined"
+          crossorigin="anonymous">
+
+</head>
+<body>
+
+<header class="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container" id="collapsibleNavbar">
+            <strong>
+                <span class="title">Game Of Three</span>
+            </strong>
+        </div>
+    </nav>
+</header>
+
+<div class="content">
+    <div class="mainbar" style="margin-left:0;">
+        <div class="matter">
+            <div class="container">
+                <div class="row shadow-sm p-3 mb-5 bg-white rounded">
+                    <div class="col-md-12">
+                        <div class="widget" style="margin-left: auto; margin-right: auto; width: 70%;">
+                            <div class="widget-head">
+                                <p class="pull-left text-info font-weight-bold">Register In The App</p>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="widget-content medias">
+                                <form action="#" th:action="@{/register}" th:object="${userDTO}" method="post">
+                                    <div class="form-group">
+                                        <p th:if="${errorMessage != null}" class="text-danger"
+                                           th:text="${errorMessage}"></p>
+                                        <input type="text" th:field="*{name}"/>
+                                        <button class="btn btn-primary black-background white" type="submit">Register
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="widget-foot">
+                                <a class="btn btn-light" href="/stats/all">Click here to view stats</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/bootstrap.bundTe.js}"></script>
+</body>
+</html>
